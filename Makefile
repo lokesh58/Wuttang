@@ -12,6 +12,9 @@ $(EXEC): $(OBJ)
 %.o: %.cpp
 	$(CC) $(CFLAGS) -c $< -o $@
 
+run:
+	./$(EXEC)
+
 clean:
 	rm -f $(OBJ) $(EXEC)
 

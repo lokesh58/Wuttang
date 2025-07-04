@@ -25,6 +25,8 @@ void Console_loop(Position &pos, searchInfo &info) {
   int time = 10000;
   int move;
 
+  info.gameMode = CONSOLEMODE;
+
   info.timeset = true;
   info.depthset = false;
   info.depth = maxDepth;
