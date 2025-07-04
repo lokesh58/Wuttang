@@ -1,4 +1,4 @@
-#include <conio.h>
+#include <termios.h>
 
 #include <iostream>
 
@@ -134,21 +134,21 @@ bool Position::makeMove(int move) {
     }
   } else if (move & MFLAGCA) {
     switch (to) {
-      case C1:
-        movePiece(A1, D1);
-        break;
-      case C8:
-        movePiece(A8, D8);
-        break;
-      case G1:
-        movePiece(H1, F1);
-        break;
-      case G8:
-        movePiece(H8, F8);
-        break;
-      default:
-        assert(false);
-        break;
+    case C1:
+      movePiece(A1, D1);
+      break;
+    case C8:
+      movePiece(A8, D8);
+      break;
+    case G1:
+      movePiece(H1, F1);
+      break;
+    case G8:
+      movePiece(H8, F8);
+      break;
+    default:
+      assert(false);
+      break;
     }
   }
 
@@ -258,21 +258,21 @@ void Position::takeMove() {
     }
   } else if (move & MFLAGCA) {
     switch (to) {
-      case C1:
-        movePiece(D1, A1);
-        break;
-      case C8:
-        movePiece(D8, A8);
-        break;
-      case G1:
-        movePiece(F1, H1);
-        break;
-      case G8:
-        movePiece(F8, H8);
-        break;
-      default:
-        assert(false);
-        break;
+    case C1:
+      movePiece(D1, A1);
+      break;
+    case C8:
+      movePiece(D8, A8);
+      break;
+    case G1:
+      movePiece(F1, H1);
+      break;
+    case G8:
+      movePiece(F8, H8);
+      break;
+    default:
+      assert(false);
+      break;
     }
   }
 

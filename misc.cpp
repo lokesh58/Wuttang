@@ -1,34 +1,31 @@
 #include "misc.h"
 
-#include <io.h>
 #include <stdio.h>
 #include <string.h>
+#include <unistd.h>
 
-#include "windows.h"
+#include <chrono>
 
-int getTimeMS() { return GetTickCount(); }
+int getTimeMS() {
+  auto now = std::chrono::steady_clock::now();
+  auto ms = std::chrono::duration_cast<std::chrono::milliseconds>(
+                now.time_since_epoch())
+                .count();
+  return static_cast<int>(ms);
+}
+
+#include <sys/select.h>
 
 int InputWaiting() {
-  static int init = 0, pipe;
-  static HANDLE inh;
-  DWORD dw;
+  struct timeval tv;
+  fd_set readfds;
 
-  if (!init) {
-    init = 1;
-    inh = GetStdHandle(STD_INPUT_HANDLE);
-    pipe = !GetConsoleMode(inh, &dw);
-    if (!pipe) {
-      SetConsoleMode(inh, dw & ~(ENABLE_MOUSE_INPUT | ENABLE_WINDOW_INPUT));
-      FlushConsoleInputBuffer(inh);
-    }
-  }
-  if (pipe) {
-    if (!PeekNamedPipe(inh, NULL, 0, NULL, &dw, NULL)) return 1;
-    return dw;
-  } else {
-    GetNumberOfConsoleInputEvents(inh, &dw);
-    return dw <= 1 ? 0 : dw;
-  }
+  tv.tv_sec = 0;
+  tv.tv_usec = 0;
+  FD_ZERO(&readfds);
+  FD_SET(STDIN_FILENO, &readfds);
+
+  return select(STDIN_FILENO + 1, &readfds, NULL, NULL, &tv) > 0;
 }
 
 void ReadInput(searchInfo &info) {
@@ -41,7 +38,8 @@ void ReadInput(searchInfo &info) {
       bytes = read(STDIN_FILENO, input, 256);
     } while (bytes < 0);
     endc = strchr(input, '\n');
-    if (endc) *endc = 0;
+    if (endc)
+      *endc = 0;
 
     if (strlen(input) > 0) {
       if (!strncmp(input, "quit", 4)) {

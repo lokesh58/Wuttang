@@ -181,8 +181,10 @@ void XBoard_loop(Position &pos, searchInfo &info) {
     }
     if (!strcmp(command, "memory")) {
       sscanf(inBuf, "memory %d", &MB);
-      if (MB < 4) MB = 4;
-      if (MB > MAX_HASH) MB = MAX_HASH;
+      if (MB < 4)
+        MB = 4;
+      if (MB > MAX_HASH)
+        MB = MAX_HASH;
       cout << "Set Hash to " << MB << " MB\n";
       initHashTable(pos.hashTable, MB);
       continue;
@@ -236,141 +238,5 @@ void XBoard_loop(Position &pos, searchInfo &info) {
       pos.makeMove(move);
       pos.ply = 0;
     }
-  }
-}
-
-void Console_loop(Position &pos, searchInfo &info) {
-  cout << "Welcome to Wuttang in console mode!\n"
-       << "Type help for commands\n\n";
-
-  info.gameMode = CONSOLEMODE;
-  info.postThinking = true;
-  setbuf(stdin, NULL);
-  setbuf(stdout, NULL);
-
-  int depth = maxDepth, movetime = 3000;
-  int engineSide = both;
-  int move = NOMOVE;
-  char inBuf[80], command[80];
-
-  engineSide = black;
-  pos.parseFEN(startFEN);
-
-  while (true) {
-    fflush(stdout);
-
-    if (pos.side == engineSide && CheckResult(pos) == false) {
-      info.starttime = getTimeMS();
-      info.depth = depth;
-
-      if (movetime != 0) {
-        info.timeset = true;
-        info.stoptime = info.starttime + movetime;
-      }
-
-      searchPosition(pos, info);
-    }
-
-    cout << "\nWuttang > ";
-
-    fflush(stdout);
-
-    memset(&inBuf[0], 0, sizeof(inBuf));
-    fflush(stdout);
-    if (!fgets(inBuf, 80, stdin)) {
-      continue;
-    }
-
-    sscanf(inBuf, "%s", command);
-
-    if (!strcmp(command, "help")) {
-      cout << "Commands:\n"
-           << "quit - quit game\n"
-           << "force - computer will not think\n"
-           << "print - show board\n"
-           << "post - show thinking\n"
-           << "nopost - do not show thinking\n"
-           << "new - start new game\n"
-           << "go - set computer thinking\n"
-           << "depth x - set depth to x\n"
-           << "time x - set thinking time to x seconds (depth still applies if "
-              "set)\n"
-           << "view - show current depth and movetime settings\n"
-           << "setboard x - set position to fen x\n"
-           << "** note ** - to reset time and depth, set to 0\n"
-           << "enter moves using b7b8q notation\n\n\n";
-      continue;
-    }
-    if (!strcmp(command, "setboard")) {
-      engineSide = both;
-      pos.parseFEN(inBuf + 9);
-      continue;
-    }
-    if (!strcmp(command, "print")) {
-      pos.display();
-      continue;
-    }
-    if (!strcmp(command, "quit")) {
-      info.quit = true;
-      break;
-    }
-    if (!strcmp(command, "post")) {
-      info.postThinking = true;
-      continue;
-    }
-    if (!strcmp(command, "nopost")) {
-      info.postThinking = false;
-      continue;
-    }
-    if (!strcmp(command, "force")) {
-      engineSide = both;
-      continue;
-    }
-    if (!strcmp(command, "view")) {
-      if (depth == maxDepth) {
-        cout << "depth not set ";
-      } else {
-        cout << "depth " << depth;
-      }
-      if (movetime != 0) {
-        cout << " movetime " << (float)movetime / 1000 << '\n';
-      } else {
-        cout << " movetime not set\n";
-      }
-      continue;
-    }
-    if (!strcmp(command, "depth")) {
-      sscanf(inBuf, "depth %d", &depth);
-      if (depth == 0) depth = maxDepth;
-      continue;
-    }
-
-    if (!strcmp(command, "time")) {
-      sscanf(inBuf, "time %d", &movetime);
-      movetime *= 1000;
-      continue;
-    }
-
-    if (!strcmp(command, "new")) {
-      // clearHashTable(pos.hashTable);
-      engineSide = black;
-      pos.parseFEN(startFEN);
-      continue;
-    }
-
-    if (!strcmp(command, "go")) {
-      engineSide = pos.side;
-      continue;
-    }
-
-    move = parseMove(inBuf, pos);
-    if (move == NOMOVE) {
-      cout << "Command unknown:" << inBuf << '\n';
-      continue;
-    }
-    if (!pos.makeMove(move)) {
-      cout << "Invalid move! King in check!\n";
-    }
-    pos.ply = 0;
   }
 }
