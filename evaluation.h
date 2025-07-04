@@ -5,4 +5,4 @@
 
 int evalPosition(const Position &pos);
 
-#endif // EVALUATION_H
+#endif  // EVALUATION_H

@@ -3,4 +3,4 @@
 
 void initAll();
 
-#endif // INIT_H
+#endif  // INIT_H

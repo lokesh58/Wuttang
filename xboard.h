@@ -7,4 +7,4 @@
 void XBoard_loop(Position &pos, searchInfo &info);
 void Console_loop(Position &pos, searchInfo &info);
 
-#endif // XBOARD_H
+#endif  // XBOARD_H

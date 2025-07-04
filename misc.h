@@ -6,4 +6,4 @@
 int getTimeMS();
 void ReadInput(searchInfo &info);
 
-#endif // MISC_H
+#endif  // MISC_H

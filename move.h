@@ -3,6 +3,7 @@
 
 #include <string>
 #include <vector>
+
 #include "data.h"
 
 /* GAME MOVE
@@ -17,9 +18,9 @@
 */
 
 #define FROMSQ(m) ((m) & 0x7F)
-#define TOSQ(m) (((m)>>7) & 0x7F)
-#define CAPTURED(m) (((m)>>14) & 0xF)
-#define PROMOTED(m) (((m)>>20) & 0xF)
+#define TOSQ(m) (((m) >> 7) & 0x7F)
+#define CAPTURED(m) (((m) >> 14) & 0xF)
+#define PROMOTED(m) (((m) >> 20) & 0xF)
 
 #define MFLAGEP 0x40000
 #define MFLAGPS 0x80000
@@ -30,10 +31,9 @@
 
 #define NOMOVE 0
 
-struct Move
-{
-    int move;
-    int score;
+struct Move {
+  int move;
+  int score;
 };
 
 std::string getSq(const int sq);
@@ -43,13 +43,12 @@ class Position;
 
 int parseMove(const std::string &moveStr, const Position &pos);
 
-class Movelist
-{
-public :
-    Move moves[maxPositionMoves];
-    int count;
+class Movelist {
+ public:
+  Move moves[maxPositionMoves];
+  int count;
 
-    void printList() const;
+  void printList() const;
 };
 
-#endif // MOVE_H
+#endif  // MOVE_H

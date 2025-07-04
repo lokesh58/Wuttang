@@ -6,4 +6,4 @@
 
 void Console_loop(Position &pos, searchInfo &info);
 
-#endif // CONSOLE_H
+#endif  // CONSOLE_H

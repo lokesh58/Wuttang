@@ -5,4 +5,4 @@
 
 void PerftTest(int depth, Position &pos);
 
-#endif // PERFT_H
+#endif  // PERFT_H
