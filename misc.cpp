@@ -38,8 +38,7 @@ void ReadInput(searchInfo &info) {
       bytes = read(STDIN_FILENO, input, 256);
     } while (bytes < 0);
     endc = strchr(input, '\n');
-    if (endc)
-      *endc = 0;
+    if (endc) *endc = 0;
 
     if (strlen(input) > 0) {
       if (!strncmp(input, "quit", 4)) {

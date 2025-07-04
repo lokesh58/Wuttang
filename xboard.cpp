@@ -181,10 +181,8 @@ void XBoard_loop(Position &pos, searchInfo &info) {
     }
     if (!strcmp(command, "memory")) {
       sscanf(inBuf, "memory %d", &MB);
-      if (MB < 4)
-        MB = 4;
-      if (MB > MAX_HASH)
-        MB = MAX_HASH;
+      if (MB < 4) MB = 4;
+      if (MB > MAX_HASH) MB = MAX_HASH;
       cout << "Set Hash to " << MB << " MB\n";
       initHashTable(pos.hashTable, MB);
       continue;
@@ -343,8 +341,7 @@ void Console_loop(Position &pos, searchInfo &info) {
     }
     if (!strcmp(command, "depth")) {
       sscanf(inBuf, "depth %d", &depth);
-      if (depth == 0)
-        depth = maxDepth;
+      if (depth == 0) depth = maxDepth;
       continue;
     }
 
