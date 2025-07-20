@@ -20,12 +20,6 @@ int main(int argc, char *argv[]) {
             << " made by Lokesh\nType 'wuttang' for console mode...\n";
   std::string input;
 
-  for (int argNum = 0; argNum < argc; ++argNum) {
-    if (!strncmp(argv[argNum], "NoBook", 6)) {
-      engineOptions.useBook = false;
-    }
-  }
-
   while (true) {
     std::cin.sync();
     std::getline(std::cin, input);

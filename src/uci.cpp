@@ -16,7 +16,6 @@ void UCI_loop(Position &pos, searchInfo &info) {
   std::cout << "id author Lokesh\n";
   std::cout << "option name Hash type spin default 128 min 4 max " << MAX_HASH
             << '\n';
-  std::cout << "option name Book type check default true\n";
   std::cout << "uciok\n";
 
   int MB = 128;
@@ -53,14 +52,6 @@ void UCI_loop(Position &pos, searchInfo &info) {
       if (MB > MAX_HASH) MB = MAX_HASH;
       std::cout << "Set Hash to " << MB << " MB\n";
       initHashTable(pos.hashTable, MB);
-    } else if (!strncmp(line, "setoption name Book value ", 26)) {
-      char *ptrTrue = nullptr;
-      ptrTrue = strstr(line, "true");
-      if (ptrTrue != nullptr) {
-        engineOptions.useBook = true;
-      } else {
-        engineOptions.useBook = false;
-      }
     }
     if (info.quit) {
       break;

@@ -51,12 +51,6 @@ const int maxPositionMoves = 256;
 
 enum GAMEMODE { UCIMODE, CONSOLEMODE };
 
-struct Options {
-  bool useBook = false;
-};
-
-extern Options engineOptions;
-
 const int sq_no = 120;
 const std::string startFEN =
     "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1";
