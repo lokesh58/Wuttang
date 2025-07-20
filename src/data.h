@@ -49,7 +49,7 @@ const int maxDepth = 128;
 const int maxGameMoves = 2048;
 const int maxPositionMoves = 256;
 
-enum GAMEMODE { UCIMODE, XBOARDMODE, CONSOLEMODE };
+enum GAMEMODE { UCIMODE, CONSOLEMODE };
 
 struct Options {
   bool useBook = false;

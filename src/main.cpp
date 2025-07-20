@@ -3,12 +3,12 @@
 #include <iostream>
 #include <string>
 
+#include "console.h"
 #include "init.h"
 #include "polybook.h"
 #include "position.h"
 #include "search.h"
 #include "uci.h"
-#include "xboard.h"
 
 int main(int argc, char *argv[]) {
   initAll();
@@ -33,8 +33,6 @@ int main(int argc, char *argv[]) {
 
     if (input == "uci") {
       UCI_loop(pos, info);
-    } else if (input == "xboard") {
-      XBoard_loop(pos, info);
     } else if (input == "wuttang") {
       Console_loop(pos, info);
     } else if (input == "quit") {

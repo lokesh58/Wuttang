@@ -337,18 +337,12 @@ void searchPosition(Position &pos, searchInfo &info) {
         std::cout << "info score cp " << bestScore << " depth " << currDepth
                   << " nodes " << info.nodes << " time "
                   << getTimeMS() - info.starttime << ' ';
-      } else if (info.gameMode == XBOARDMODE) {
-        std::cout << currDepth << ' ' << bestScore << ' '
-                  << (getTimeMS() - info.starttime) / 10 << ' ' << info.nodes
-                  << ' ';
       } else if (info.postThinking == true) {
         std::cout << "score : " << (float)bestScore / 100 << " depth "
                   << currDepth << ' ';
       }
       if (info.gameMode == UCIMODE || info.postThinking == true) {
-        if (info.gameMode != XBOARDMODE) {
-          std::cout << "pv";
-        }
+        std::cout << "pv";
         for (pvNum = 0; pvNum < pvMoves; ++pvNum) {
           std::cout << ' ' << getMove(pos.pvArray[pvNum]);
         }
@@ -359,9 +353,6 @@ void searchPosition(Position &pos, searchInfo &info) {
 
   if (info.gameMode == UCIMODE) {
     std::cout << "bestmove " << getMove(bestMove) << '\n';
-  } else if (info.gameMode == XBOARDMODE) {
-    std::cout << "move " << getMove(bestMove) << '\n';
-    pos.makeMove(bestMove);
   } else {
     pos.makeMove(bestMove);
     pos.display();
