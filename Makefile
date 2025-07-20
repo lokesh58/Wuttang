@@ -1,22 +1,26 @@
 CC = g++
 CFLAGS = -Wall -O2
-SRC = $(wildcard *.cpp)
-OBJ = $(SRC:.cpp=.o)
-EXEC = wuttang
+SRC = $(wildcard src/*.cpp)
+OBJ = $(patsubst src/%.cpp,build/%.o,$(SRC))
+EXEC = bin/wuttang
 
 all: $(EXEC)
 
 $(EXEC): $(OBJ)
+	mkdir -p bin
 	$(CC) $(OBJ) -o $(EXEC)
 
-%.o: %.cpp
+build/%.o: src/%.cpp | build
 	$(CC) $(CFLAGS) -c $< -o $@
+
+build:
+	mkdir -p build
 
 run:
 	./$(EXEC)
 
 clean:
-	rm -f $(OBJ) $(EXEC)
+	rm -f build/*.o $(EXEC)
 
-.PHONY: all clean
+.PHONY: all build run clean
 
