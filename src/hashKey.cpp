@@ -1,7 +1,6 @@
 #include "hashKey.h"
 
 #include "data.h"
-#include "validate.h"
 
 Key pieceKeys[13][120];
 Key castleKeys[16];

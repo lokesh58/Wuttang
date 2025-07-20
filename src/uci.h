@@ -1,8 +1,6 @@
 #ifndef UCI_H
 #define UCI_H
 
-#include <string.h>
-
 #include "position.h"
 #include "search.h"
 

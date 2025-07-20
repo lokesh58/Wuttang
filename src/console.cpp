@@ -1,8 +1,7 @@
 #include "console.h"
 
-#include <string.h>
-
 #include <cstdio>
+#include <cstring>
 #include <iostream>
 
 #include "data.h"

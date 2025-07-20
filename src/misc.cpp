@@ -1,10 +1,10 @@
 #include "misc.h"
 
-#include <stdio.h>
-#include <string.h>
 #include <unistd.h>
 
 #include <chrono>
+#include <cstdio>
+#include <cstring>
 
 int getTimeMS() {
   auto now = std::chrono::steady_clock::now();

@@ -1,10 +1,7 @@
 #include <termios.h>
 
-#include <iostream>
-
 #include "hashKey.h"
 #include "position.h"
-#include "validate.h"
 
 #define INCHECK ((isSqAttacked(kingSq[side], side ^ 1)))
 

@@ -1,7 +1,5 @@
 #include "evaluation.h"
 
-#include <stdlib.h>
-
 #include "bitboards.h"
 #include "data.h"
 

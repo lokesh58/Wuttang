@@ -1,5 +1,6 @@
 #include "uci.h"
 
+#include <cstring>
 #include <iostream>
 
 #include "data.h"

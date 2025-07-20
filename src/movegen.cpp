@@ -1,7 +1,5 @@
 #include "movegen.h"
 
-#include <iostream>
-
 #include "data.h"
 
 static int MvvLvaScores[13][13];
