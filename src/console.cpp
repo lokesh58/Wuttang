@@ -8,7 +8,6 @@
 #include "data.h"
 #include "misc.h"
 #include "movegen.h"
-#include "polybook.h"
 
 using namespace std;
 

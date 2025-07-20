@@ -5,7 +5,6 @@
 
 #include "console.h"
 #include "init.h"
-#include "polybook.h"
 #include "position.h"
 #include "search.h"
 #include "uci.h"
@@ -46,7 +45,6 @@ int main(int argc, char *argv[]) {
   }
 
   delete[] pos.hashTable.pTable;
-  cleanPolyBook();
 
   return 0;
 }

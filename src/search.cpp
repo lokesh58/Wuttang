@@ -1,13 +1,11 @@
 #include "search.h"
 
-#include <iomanip>
 #include <iostream>
 
 #include "data.h"
 #include "evaluation.h"
 #include "misc.h"
 #include "movegen.h"
-#include "polybook.h"
 #include "position.h"
 
 static void checkUp(searchInfo &info) {
@@ -318,36 +316,30 @@ void searchPosition(Position &pos, searchInfo &info) {
 
   clearForSearch(pos, info);
 
-  if (engineOptions.useBook == true) {
-    bestMove = getBookMove(pos);
-  }
-
   // Iterative Deepening
-  if (bestMove == NOMOVE) {
-    for (currDepth = 1; currDepth <= info.depth; ++currDepth) {  // alpha beta
-      bestScore = alphaBeta(-INFINITE, INFINITE, currDepth, pos, info, false);
+  for (currDepth = 1; currDepth <= info.depth; ++currDepth) {  // alpha beta
+    bestScore = alphaBeta(-INFINITE, INFINITE, currDepth, pos, info, false);
 
-      if (info.stopped == true) {
-        break;
-      }
+    if (info.stopped == true) {
+      break;
+    }
 
-      pvMoves = getPvLine(currDepth, pos);
-      bestMove = pos.pvArray[0];
-      if (info.gameMode == UCIMODE) {
-        std::cout << "info score cp " << bestScore << " depth " << currDepth
-                  << " nodes " << info.nodes << " time "
-                  << getTimeMS() - info.starttime << ' ';
-      } else if (info.postThinking == true) {
-        std::cout << "score : " << (float)bestScore / 100 << " depth "
-                  << currDepth << ' ';
+    pvMoves = getPvLine(currDepth, pos);
+    bestMove = pos.pvArray[0];
+    if (info.gameMode == UCIMODE) {
+      std::cout << "info score cp " << bestScore << " depth " << currDepth
+                << " nodes " << info.nodes << " time "
+                << getTimeMS() - info.starttime << ' ';
+    } else if (info.postThinking == true) {
+      std::cout << "score : " << (float)bestScore / 100 << " depth "
+                << currDepth << ' ';
+    }
+    if (info.gameMode == UCIMODE || info.postThinking == true) {
+      std::cout << "pv";
+      for (pvNum = 0; pvNum < pvMoves; ++pvNum) {
+        std::cout << ' ' << getMove(pos.pvArray[pvNum]);
       }
-      if (info.gameMode == UCIMODE || info.postThinking == true) {
-        std::cout << "pv";
-        for (pvNum = 0; pvNum < pvMoves; ++pvNum) {
-          std::cout << ' ' << getMove(pos.pvArray[pvNum]);
-        }
-        std::cout << '\n';
-      }
+      std::cout << '\n';
     }
   }
 
