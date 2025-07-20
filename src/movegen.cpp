@@ -244,7 +244,7 @@ void generateAllMoves(const Position &pos, Movelist &list) {
         dir = PceDir[pce][i];
         t_sq = sq + dir;
 
-        while (!SQOFFBOARD(sq)) {
+        while (!SQOFFBOARD(t_sq)) {
           // black^1 == white   white^1 == black
           if (pos.pieces[t_sq] != EMPTY) {
             if (pceCol[pos.pieces[t_sq]] == (side ^ 1)) {
@@ -276,7 +276,7 @@ void generateAllMoves(const Position &pos, Movelist &list) {
         dir = PceDir[pce][i];
         t_sq = sq + dir;
 
-        if (!SQOFFBOARD(sq)) {
+        if (!SQOFFBOARD(t_sq)) {
           // black^1 == white   white^1 == black
           if (pos.pieces[t_sq] != EMPTY) {
             if (pceCol[pos.pieces[t_sq]] == (side ^ 1)) {
@@ -357,7 +357,7 @@ void generateAllCaps(const Position &pos, Movelist &list) {
         dir = PceDir[pce][i];
         t_sq = sq + dir;
 
-        while (!SQOFFBOARD(sq)) {
+        while (!SQOFFBOARD(t_sq)) {
           // black^1 == white   white^1 == black
           if (pos.pieces[t_sq] != EMPTY) {
             if (pceCol[pos.pieces[t_sq]] == (side ^ 1)) {
@@ -387,7 +387,7 @@ void generateAllCaps(const Position &pos, Movelist &list) {
         dir = PceDir[pce][i];
         t_sq = sq + dir;
 
-        if (!SQOFFBOARD(sq)) {
+        if (!SQOFFBOARD(t_sq)) {
           // black^1 == white   white^1 == black
           if (pos.pieces[t_sq] != EMPTY) {
             if (pceCol[pos.pieces[t_sq]] == (side ^ 1)) {
