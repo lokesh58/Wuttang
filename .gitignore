@@ -1,2 +1,2 @@
-*.o
-wuttang
+build/
+bin/
